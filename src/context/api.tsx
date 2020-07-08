@@ -77,11 +77,12 @@ export const ApiProvider = ({ children } : IApiProvider) => {
     const deleteMaterial = (id: number) => {
         let status: Status
         setLoading(true)
-        // call api
-        const idx = materials.find((material: IMaterial) => material.id === id) as number | undefined
-        if (idx) {
+        // call api here
+        const idx = materials.findIndex((material: IMaterial) => material.id === id) as number
+        if (idx !== -1) {
             status = Status.success
-            setMaterials(materials.splice(idx, 1))
+            setMaterials([...materials.splice(idx, 1)])
+            console.log([...materials.splice(idx, 1)])
         } else {
             status = Status.error
         }

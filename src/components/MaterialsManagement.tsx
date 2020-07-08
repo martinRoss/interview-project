@@ -49,35 +49,47 @@ enum Views {
 }
 
 function MaterialsManagement(props: IMaterialsManagementProps) {
-    const { materials } = props
+    const { materials, deleteMaterial } = props
     const { theme } = useTheme()
     const [currentView, setCurrentView] = useState(Views.blank)
+    const [selectedMaterial, setSelectedMaterial] = useState()
 
     const getCurrentView = (view: Views) => {
         switch (view) {
             case Views.blank:
                 return <div></div>
             case Views.form:
-                return <MaterialsForm />
+                return <MaterialsForm
+                selectedMaterial={selectedMaterial}
+                key={!!selectedMaterial ? selectedMaterial.id : 'new'}/>
             default:
                 return null
         }
     }
 
     const onClickAdd = () => setCurrentView(Views.form)
+    const onClickDelete = () => {
+        if (!!selectedMaterial) deleteMaterial(selectedMaterial.id)
+    }
 
     return (
         <RootContainer>
             <H1>Materials</H1>
             <Controls theme={theme}>
                 {/* Ideally these control strings would come from a language context
-                that defines static labels based on the current language */}
+                that defines static labels based on localization */}
                 <Button onClick={ onClickAdd } primary>Add</Button>
-                <Button>Delete</Button>
+                <Button
+                onClick={onClickDelete}
+                disabled={ typeof selectedMaterial === 'undefined' }>
+                    Delete
+                </Button>
             </Controls>
             <Container>
                 <MaterialsList
                 materials={materials}
+                selectedMaterial={selectedMaterial}
+                setSelectedMaterial={setSelectedMaterial}
                 />
                 <ViewContainer>
                     { getCurrentView(currentView) }

@@ -5,7 +5,7 @@ import styled from 'styled-components'
 // Private
 import Input from './Input'
 import { useTheme } from '../context/theme'
-import { useApi } from '../context/api'
+import { useApi, IMaterial } from '../context/api'
 import Button from './Button'
 
 const Form = styled.form`
@@ -22,9 +22,12 @@ const Label = styled.label`
 const Column = styled.div`
   margin-right: ${props => props.theme.grid * 4}px;
 `
-
-function MaterialsForm () {
+interface IMaterialsFormProps {
+    selectedMaterial?: IMaterial
+}
+function MaterialsForm (props: IMaterialsFormProps) {
     const { theme } = useTheme()
+    const defaultValue = props.selectedMaterial ? props.selectedMaterial : {} as IMaterial
     const api = useApi() // Might pass these down depending on the situation
     const name = createRef()
     const volume = createRef()
@@ -63,6 +66,7 @@ function MaterialsForm () {
                 id="name"
                 placeholder="New Material"
                 ref={name}
+                defaultValue={defaultValue.name}
                 theme={theme}
                 type="text" />
                 <br />
@@ -75,6 +79,7 @@ function MaterialsForm () {
                 min={0}
                 step={1}
                 ref={volume}
+                defaultValue={defaultValue.volume}
                 theme={theme}/>
                 <br />
                 <Label theme={theme} htmlFor="delivery">Delivery Date</Label>
@@ -84,6 +89,7 @@ function MaterialsForm () {
                 id="delivery"
                 type="date"
                 ref={delivery}
+                defaultValue={defaultValue.delivery}
                 theme={theme}/>
             </Column>
             <Column theme={theme}>
@@ -94,6 +100,7 @@ function MaterialsForm () {
                 id="color"
                 type="color"
                 ref={color}
+                defaultValue={defaultValue.color}
                 theme={theme}/>
                 <br />
                 <Label theme={theme} htmlFor="cost">Cost (USD per m<sup>3</sup>)</Label>
@@ -104,10 +111,11 @@ function MaterialsForm () {
                 type="number"
                 step={1}
                 ref={cost}
+                defaultValue={defaultValue.cost}
                 theme={theme}/>
             </Column>
             {/* Would disable this until validation passes */}
-            <Button type="submit">Save</Button>
+            <Button type="submit">Add</Button>
         </Form>
     )
 }

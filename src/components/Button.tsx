@@ -22,19 +22,27 @@ interface IButtonProps {
     onClick?: () => void
     children: React.ReactChild
     type?: "button" | "submit" | "reset" | undefined
+    disabled?: boolean
 }
 
 
 function Button(props: IButtonProps) {
-    const { primary, children } = props
+    const { primary, children, disabled } = props
     const { theme } = useTheme()
+    let backgroundColor = theme.secondary
+    if (primary) {
+        backgroundColor = theme.primary
+    }
+    if (disabled) {
+        backgroundColor = theme.containers
+    }
     return (
         <StyledButton
         {...props}
         theme={theme}
         style={{
             color: theme.foreground,
-            backgroundColor: primary ? theme.primary : theme.secondary,
+            backgroundColor
         }}>
             { children }
         </StyledButton>

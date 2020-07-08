@@ -8,6 +8,8 @@ import { useTheme } from '../context/theme'
 
 interface IMaterialsListProps {
     materials: IMaterial[]
+    selectedMaterial?: IMaterial
+    setSelectedMaterial: any
 }
 
 const Container = styled.div`
@@ -18,10 +20,11 @@ const Container = styled.div`
   background: ${props => props.theme.containers};
 `
 
-const ListItem = styled.div`
+const ListItem = styled.div<any>`
   padding: ${props => props.theme.grid}px;
-  border-bottom: 1px solid ${props => props.theme.background};
   display: flex;
+  border: 1px solid ${props => props.selected ? props.theme.primary : 'rgba(0, 0, 0, 0)'};
+  border-bottom: 1px solid ${props => !props.selected ? props.theme.background : props.theme.primary};
 `
 const Color = styled.div`
   border-radius: 50%;
@@ -44,7 +47,11 @@ function MaterialsList (props: IMaterialsListProps) {
     return (
         <Container theme={theme}>
             {props.materials.map((material: IMaterial) => (
-                <ListItem theme={theme} key={material.id}>
+                <ListItem
+                onClick={ () => props.setSelectedMaterial(material)}
+                theme={theme}
+                key={material.id}
+                selected={material === props.selectedMaterial}>
                     <Color color={material.color} theme={theme} />
                     <div>
                         <ListItemTitle>{ material.name }</ListItemTitle>
