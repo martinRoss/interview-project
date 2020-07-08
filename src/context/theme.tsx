@@ -5,13 +5,8 @@ enum ThemeType {
     light = 'light'
 }
 
-interface IThemeContext {
-    theme: object,
-    toggleTheme: () => void
-}
-
 interface IThemeProvider {
-    children: React.ReactChild
+    children?: React.ReactChild
     type?: ThemeType
 }
 

@@ -13,7 +13,7 @@ interface IMaterialsListProps {
 }
 
 const Container = styled.div`
-  width: 220px;
+  min-width: 220px;
   height: 284px;
   margin-right: ${props => props.theme.grid * 2}px;
   border: 1px solid #565664;
@@ -28,14 +28,14 @@ const ListItem = styled.div<any>`
   border: 1px solid ${props => props.selected ? props.theme.primary : 'rgba(0, 0, 0, 0)'};
   border-bottom: 1px solid ${props => !props.selected ? props.theme.background : props.theme.primary};
 `
-const Color = styled.div`
+const ColorTag = styled.div`
   border-radius: 50%;
   background-color: ${props => props.color};
   height: ${props => props.theme.grid * 2}px;
   width: ${props => props.theme.grid * 2}px;
   margin-right: ${props => props.theme.grid}px;
 `
-// I would normally pull these out into a typography module
+// I would normally pull typography styles out into a typography module
 const ListItemTitle = styled.h3`
   font-size: 14px;
   margin: 0;
@@ -54,7 +54,7 @@ function MaterialsList (props: IMaterialsListProps) {
                 theme={theme}
                 key={material.id}
                 selected={material === props.selectedMaterial}>
-                    <Color color={material.color} theme={theme} />
+                    <ColorTag color={material.color} theme={theme} />
                     <div>
                         <ListItemTitle>{ material.name }</ListItemTitle>
                         <ListItemDetails>{ `${material.volume} m3` }</ListItemDetails>

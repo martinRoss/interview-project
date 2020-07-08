@@ -71,6 +71,7 @@ function MaterialsManagement(props: IMaterialsManagementProps) {
             case Views.form:
                 return <MaterialsForm
                 selectedMaterial={selectedMaterial}
+                // @ts-ignore
                 key={!!selectedMaterial ? selectedMaterial.id : 'new'}/>
             default:
                 return null
@@ -79,6 +80,7 @@ function MaterialsManagement(props: IMaterialsManagementProps) {
 
     const onClickAdd = () => setCurrentView(Views.form)
     const onClickDelete = () => {
+        // @ts-ignore
         if (!!selectedMaterial) deleteMaterial(selectedMaterial.id)
     }
 

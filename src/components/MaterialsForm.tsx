@@ -51,11 +51,11 @@ function MaterialsForm (props: IMaterialsFormProps) {
             // @ts-ignore
             cost: cost.current.value as number
         })
-        // Wouldnt leave this in for prod
+        // Would not leave this in for prod
         console.log(status)
     }
     return (
-        <Form onSubmit={onSubmit} theme={theme}>
+        <Form onSubmit={onSubmit} theme={theme} data-testid="material-form">
             <Column theme={theme}>
                 {/* Ideally would pull Label into a component (beyond a styled component) 
                 to not have to pass in theme for each one */}
@@ -115,7 +115,7 @@ function MaterialsForm (props: IMaterialsFormProps) {
                 theme={theme}/>
             </Column>
             {/* Would disable this until validation passes */}
-            <Button type="submit">Add</Button>
+            <Button type="submit">Submit</Button>
         </Form>
     )
 }
