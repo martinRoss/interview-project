@@ -8,29 +8,28 @@ import { useTheme } from '../context/theme'
 const StyledInput = styled.input`
     padding: 9px 15px;
     border: none;
-    borderRadius: ${props => props.theme.inputBorderRadius}
-    background: ${props => props.theme.background}
+    border-radius: ${props => props.theme.inputBorderRadius}px;
+    background: ${props => props.theme.background};
+    margin-top: ${props => props.theme.grid}px;
+    margin-bottom: ${props => props.theme.grid * 2}px;
+    color: ${props => props.theme.foreground};
 `
 
-interface IInputProps {
-    onClick?: () => {}
-    children: React.ReactChild
-}
-
-
-function Input(props: IInputProps) {
+// Would not use any type, simplying things for times sake
+const Input = React.forwardRef((props: any, ref: any) => {
     const { children } = props
     const { theme } = useTheme()
     return (
         <StyledInput
         {...props}
         theme={theme}
+        ref={ref}
         style={{
             color: theme.foreground,
         }}>
             { children }
         </StyledInput>
     )
-}
+})
 
 export default Input

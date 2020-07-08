@@ -16,8 +16,9 @@ interface IThemeProvider {
 }
 
 const commonThemeElements = {
+    grid: 12,
     buttonBorderRadius: 26,
-    inputBorderRadius: 12
+    inputBorderRadius: 4
 }
 const themes = {
     dark: {

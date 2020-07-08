@@ -8,13 +8,20 @@ import { useTheme } from '../context/theme'
 const StyledButton = styled.button`
     padding: 9px 15px;
     border: none;
-    borderRadius: ${props => props.theme.buttonBorderRadius}
+    border-radius: ${props => props.theme.buttonBorderRadius}px;
+    margin-right ${props => props.theme.grid}px;
+    height ${props => props.theme.grid * 3}px;
+
+    & :hover {
+        cursor: pointer;
+    }
 `
 
 interface IButtonProps {
     primary?: boolean
-    onClick?: () => {}
+    onClick?: () => void
     children: React.ReactChild
+    type?: "button" | "submit" | "reset" | undefined
 }
 
 

@@ -10,6 +10,8 @@ export interface IMaterial {
     name: string
     cost: number
     volume: number
+    color: string
+    delivery: string | Date
 }
 
 
@@ -62,7 +64,7 @@ export const ApiProvider = ({ children } : IApiProvider) => {
         const savedMaterial = { ...material, id: generateId() }
         setMaterials([
             ...materials,
-            material
+            savedMaterial
         ])
         setLoading(false)
         
