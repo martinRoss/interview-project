@@ -79,10 +79,12 @@ export const ApiProvider = ({ children } : IApiProvider) => {
         setLoading(true)
         // call api here
         const idx = materials.findIndex((material: IMaterial) => material.id === id) as number
+        console.log(idx)
         if (idx !== -1) {
+            const newMaterials = [...materials]
+            newMaterials.splice(idx, 1)
+            setMaterials(newMaterials)
             status = Status.success
-            setMaterials([...materials.splice(idx, 1)])
-            console.log([...materials.splice(idx, 1)])
         } else {
             status = Status.error
         }

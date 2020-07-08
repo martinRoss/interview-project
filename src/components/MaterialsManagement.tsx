@@ -9,6 +9,7 @@ import { useTheme } from '../context/theme'
 import Button from './Button'
 import MaterialsList from './MaterialsList'
 import MaterialsForm from './MaterialsForm'
+import {calculateTotalCostOfMaterialList} from '../utils'
 
 interface IMaterialsManagementProps {
     materials: IMaterial[]
@@ -41,6 +42,15 @@ const ViewContainer = styled.div`
 
 const Controls = styled.div`
   margin: 0 0 ${props => props.theme.grid * 2}px 0;
+`
+
+const TotalCost = styled.div`
+  margin-top: ${props => props.theme.grid * 2}px;
+  display: flex;
+  width: 222px;
+`
+const Spacer = styled.div`
+  flex: 1;
 `
 
 enum Views {
@@ -95,6 +105,7 @@ function MaterialsManagement(props: IMaterialsManagementProps) {
                     { getCurrentView(currentView) }
                 </ViewContainer>
             </Container>
+            <TotalCost theme={theme}><span>Total cost:</span><Spacer />${ calculateTotalCostOfMaterialList(materials).toFixed(2) }</TotalCost>
         </RootContainer>
     )
 }

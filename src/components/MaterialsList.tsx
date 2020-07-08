@@ -18,6 +18,8 @@ const Container = styled.div`
   margin-right: ${props => props.theme.grid * 2}px;
   border: 1px solid #565664;
   background: ${props => props.theme.containers};
+  overflow-x: hidden;
+  overflow-y: auto;
 `
 
 const ListItem = styled.div<any>`
