@@ -8,10 +8,11 @@ test('renders an App component with a "Materials" heading', () => {
     expect(title).toBeInTheDocument()
 })
 
-test('renders an App with two buttons', () => {
+test('renders an App with three buttons', () => {
     const { getAllByRole } = render(<App />)
     const buttons = getAllByRole("button")
-    expect(buttons.length).toBe(2)
+    // Add, delete, toggle theme
+    expect(buttons.length).toBe(3)
 })
 
 test('renders a total of $0.00 on initialization', () => {
