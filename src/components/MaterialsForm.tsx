@@ -23,8 +23,16 @@ const Column = styled.div`
   margin-right: ${props => props.theme.grid * 4}px;
 `
 interface IMaterialsFormProps {
+    /**
+     * Current selected material to use as defaultValue
+     */
     selectedMaterial?: IMaterial
 }
+/**
+ * Form to add/edit a material  
+ * @param {IMaterialsFormProps} props 
+ * @constructor
+ */
 function MaterialsForm (props: IMaterialsFormProps) {
     const { theme } = useTheme()
     const defaultValue = props.selectedMaterial ? props.selectedMaterial : {} as IMaterial
@@ -35,10 +43,14 @@ function MaterialsForm (props: IMaterialsFormProps) {
     const color = createRef()
     const cost = createRef()
 
-    
+   
+    /**
+     * Form's onSubmit handler 
+     * @param {React.FormEvent<HTMLFormElement>} event OnSubmit event
+     */
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        // Do some client side validation
+        // In actual system, do some client side validation
         api.addMaterial({
             // @ts-ignore -- saving time
             name: name.current.value as string,
@@ -65,7 +77,6 @@ function MaterialsForm (props: IMaterialsFormProps) {
                 placeholder="New Material"
                 ref={name}
                 defaultValue={defaultValue.name}
-                theme={theme}
                 type="text" />
                 <br />
                 <Label theme={theme} htmlFor="volume">Volume (m<sup>3</sup>)</Label>
@@ -77,8 +88,7 @@ function MaterialsForm (props: IMaterialsFormProps) {
                 min={0}
                 step={1}
                 ref={volume}
-                defaultValue={defaultValue.volume}
-                theme={theme}/>
+                defaultValue={defaultValue.volume} />
                 <br />
                 <Label theme={theme} htmlFor="delivery">Delivery Date</Label>
                 <br />
@@ -87,8 +97,7 @@ function MaterialsForm (props: IMaterialsFormProps) {
                 id="delivery"
                 type="date"
                 ref={delivery}
-                defaultValue={defaultValue.delivery}
-                theme={theme}/>
+                defaultValue={defaultValue.delivery} />
             </Column>
             <Column theme={theme}>
                 <Label theme={theme} htmlFor="color">Color</Label>
@@ -98,8 +107,7 @@ function MaterialsForm (props: IMaterialsFormProps) {
                 id="color"
                 type="color"
                 ref={color}
-                defaultValue={defaultValue.color}
-                theme={theme}/>
+                defaultValue={defaultValue.color} />
                 <br />
                 <Label theme={theme} htmlFor="cost">Cost (USD per m<sup>3</sup>)</Label>
                 <br />
@@ -109,8 +117,7 @@ function MaterialsForm (props: IMaterialsFormProps) {
                 type="number"
                 step={1}
                 ref={cost}
-                defaultValue={defaultValue.cost}
-                theme={theme}/>
+                defaultValue={defaultValue.cost} />
             </Column>
             {/* Would disable this until validation passes */}
             <Button type="submit" primary disabled={api.loading}>

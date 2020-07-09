@@ -3,8 +3,14 @@ import React from 'react'
 import styled from 'styled-components'
 
 // Private
-import { useTheme } from '../context/theme'
+// eslint-disable-next-line
+import { useTheme, ITheme } from '../context/theme'
 
+/**
+ * Input styled with styled components
+ * @param {ITheme} theme Current theme
+ * @constructor
+ */
 const StyledInput = styled.input`
     padding: 9px 15px;
     border: none;
@@ -15,7 +21,7 @@ const StyledInput = styled.input`
     color: ${props => props.theme.foreground};
 `
 
-// Would not use any type, simplying things for times sake
+// Would not use the 'any' type, simplying things for times sake
 const Input = React.forwardRef((props: any, ref: any) => {
     const { children } = props
     const { theme } = useTheme()

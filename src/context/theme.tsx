@@ -10,6 +10,40 @@ interface IThemeProvider {
     type?: ThemeType
 }
 
+export interface ITheme {
+    /**
+     * grid: base grid system
+     */
+    grid: number
+    /**
+     * buttonBorderRadius: border radius of buttons
+     */
+    buttonBorderRadius: number
+    /**
+     * inputBorderRadius: border radius of the input element
+     */
+    inputBorderRadius: number
+    /**
+     * primary: Color for main interactive element that grabs attention
+     */
+    primary: string
+    /**
+     * secondary: Color for buttons that grab less attention, can have multiple in screen
+     */
+    secondary: string
+    /**
+     * foreground: Foreground color
+     */
+    foreground: string
+    /**
+     * background: Background color
+     */
+    background: string
+    /**
+     * containers: Color to create slight contrast with background
+     */
+    containers: string
+}
 const commonThemeElements = {
     grid: 12,
     buttonBorderRadius: 26,
@@ -23,7 +57,7 @@ const themes = {
         background: '#29292F', // Main background color
         containers: '#1D1D21', // Contrast to background
         ...commonThemeElements
-    },
+    } as ITheme,
     light: {
         primary: '#0075DB', // Primary action items such as buttons
         secondary: '#FF444C', // Secondary action items
@@ -31,7 +65,7 @@ const themes = {
         foreground: '#29292F', // Main background color
         containers: '#DDDDDD', // Contrast to background
         ...commonThemeElements
-    }
+    } as ITheme
 }
 
 export const ThemeContext = createContext({
