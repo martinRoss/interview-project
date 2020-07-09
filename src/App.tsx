@@ -8,6 +8,7 @@ import { ApiProvider } from './context/api'
 import MaterialsManagement from './containers/MaterialsManagement'
 import Button from './components/Button'
 
+// Button to toggle the theme
 const ThemeButton = styled(Button)`
   position: fixed;
   top: ${props => props.theme.grid * 2}px;
@@ -34,7 +35,7 @@ function App() {
             <ThemeContext.Consumer>
             {({ theme, toggleTheme }) => (
                 <AppContainer theme={theme}>
-                    <ThemeButton onClick={() => toggleTheme()} theme={theme}>
+                    <ThemeButton flat onClick={() => toggleTheme()} theme={theme}>
                         Toggle Theme
                     </ThemeButton>
                     <MaterialsManagement />

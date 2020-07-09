@@ -113,7 +113,7 @@ function MaterialsForm (props: IMaterialsFormProps) {
                 theme={theme}/>
             </Column>
             {/* Would disable this until validation passes */}
-            <Button type="submit" disabled={api.loading}>
+            <Button type="submit" primary disabled={api.loading}>
                 { api.loading ? 'loading...' : 'submit' }
             </Button>
         </Form>
