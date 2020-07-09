@@ -17,6 +17,7 @@ function MaterialsManagement() {
     // On mount, fetch materials
     useEffect(() => {
         getMaterials()
+        // eslint-disable-next-line
     }, [])
 
     return (

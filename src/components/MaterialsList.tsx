@@ -22,7 +22,7 @@ const Container = styled.div`
   overflow-y: auto;
 `
 
-const ListItem = styled.div<any>`
+const ListItem = styled.li<any>`
   padding: ${props => props.theme.grid}px;
   display: flex;
   border: 1px solid ${props => props.selected ? props.theme.primary : 'rgba(0, 0, 0, 0)'};
