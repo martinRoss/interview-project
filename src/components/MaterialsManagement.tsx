@@ -36,6 +36,12 @@ const Container = styled.div`
   display: flex;
 `
 
+const Placeholder = styled.div`
+  background-color: ${props => props.theme.containers};
+  height: 100%;
+  flex: 1;
+`
+
 const ViewContainer = styled.div`
   flex: 1;
 `
@@ -67,12 +73,12 @@ function MaterialsManagement(props: IMaterialsManagementProps) {
     const getCurrentView = (view: Views) => {
         switch (view) {
             case Views.blank:
-                return <div></div>
+                return <Placeholder theme={theme} />
             case Views.form:
                 return <MaterialsForm
                 selectedMaterial={selectedMaterial}
                 // @ts-ignore
-                key={!!selectedMaterial ? selectedMaterial.id : 'new'}/>
+                key={!!selectedMaterial ? selectedMaterial.id : 'new'} />
             default:
                 return null
         }

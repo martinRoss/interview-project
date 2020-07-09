@@ -12,8 +12,9 @@ const StyledButton = styled.button`
     margin-right ${props => props.theme.grid}px;
     height ${props => props.theme.grid * 3}px;
 
-    & :hover {
+    &:hover {
         cursor: pointer;
+        box-shadow: 2px 5px 12px rgba(0, 0, 0, 0.35);
     }
 `
 

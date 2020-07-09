@@ -6,6 +6,13 @@ import styled from 'styled-components'
 import { ThemeProvider, ThemeContext } from './context/theme'
 import { ApiProvider } from './context/api'
 import MaterialsManagement from './containers/MaterialsManagement'
+import Button from './components/Button'
+
+const ThemeButton = styled(Button)`
+  position: fixed;
+  top: ${props => props.theme.grid * 2}px;
+  right: ${props => props.theme.grid * 2}px;
+`
 
 /**
  * Top level visual component that uses the current theme selection to display the application
@@ -25,8 +32,11 @@ function App() {
     <ThemeProvider>
         <ApiProvider>
             <ThemeContext.Consumer>
-            {({ theme }) => (
+            {({ theme, toggleTheme }) => (
                 <AppContainer theme={theme}>
+                    <ThemeButton onClick={() => toggleTheme()} theme={theme}>
+                        Toggle Theme
+                    </ThemeButton>
                     <MaterialsManagement />
                 </AppContainer>
             )}
