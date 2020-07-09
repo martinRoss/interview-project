@@ -39,7 +39,7 @@ function MaterialsForm (props: IMaterialsFormProps) {
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         // Do some client side validation
-        const { status } = api.addMaterial({
+        api.addMaterial({
             // @ts-ignore -- saving time
             name: name.current.value as string,
             // @ts-ignore
@@ -51,8 +51,6 @@ function MaterialsForm (props: IMaterialsFormProps) {
             // @ts-ignore
             cost: cost.current.value as number
         })
-        // Would not leave this in for prod
-        console.log(status)
     }
     return (
         <Form onSubmit={onSubmit} theme={theme} data-testid="material-form">
@@ -115,7 +113,9 @@ function MaterialsForm (props: IMaterialsFormProps) {
                 theme={theme}/>
             </Column>
             {/* Would disable this until validation passes */}
-            <Button type="submit">Submit</Button>
+            <Button type="submit" disabled={api.loading}>
+                { api.loading ? 'loading...' : 'submit' }
+            </Button>
         </Form>
     )
 }

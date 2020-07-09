@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState } from 'react'
-
 /**
  * Api response status values
  */
@@ -55,19 +54,19 @@ export interface IApiContext {
     /**
      * getMaterials: fetches materials from server and loads them into memory
      */
-    getMaterials: () => { data: IMaterial[], status: Status }
+    getMaterials: () => Promise<{ data: IMaterial[], status: Status }>
     /**
      * addMaterial: posts a new material to the server and updates local store on success, non-optimistically 
      */
-    addMaterial: (material: IMaterial) =>  { material: IMaterial, status: Status }
+    addMaterial: (material: IMaterial) =>  Promise<{ material: IMaterial, status: Status }>
     /**
      * deleteMaterial: Deletes material from server and updates local store on success, non-optimistically
      */
-    deleteMaterial: (id: number) => { id: number, status: Status }
+    deleteMaterial: (id: number) => Promise<{ id: number, status: Status }>
     /**
      * editMaterial: Edits material from server and updates local store on success, non-optimistically
      */
-    editMaterial: (material: IMaterial) => { material: IMaterial, status: Status }
+    editMaterial: (material: IMaterial) => Promise<{ material: IMaterial, status: Status }>
     /**
      * loading: Returns true if waiting on response from server
      */
@@ -92,6 +91,13 @@ const idGenerator = () => {
         current += 1
         return current
     }
+}
+/**
+ * Promisified function for mocking api calls
+ * https://stackoverflow.com/questions/33289726/combination-of-async-function-await-settimeout
+ */
+function timeout(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 // Creates an idGenerator
 const generateId = idGenerator()
@@ -128,9 +134,10 @@ export const ApiProvider = ({ children } : IApiProvider) => {
      * Fetch materials from "server"
      * @returns {GetMaterialsResponse} Response object from fetching materials
      */
-    const getMaterials = () => {
+    const getMaterials = async () => {
         setLoading(true)
-        // await call Api
+        // mock call to Api
+        await timeout(2000)
         const data = [] as IMaterial[]
         setMaterials(data)
         setLoading(false)
@@ -149,11 +156,11 @@ export const ApiProvider = ({ children } : IApiProvider) => {
      * @param {IMaterial} material: material to add
      * @returns {RemoteMaterialOperationResponse}
      */
-    const addMaterial = (material: IMaterial) => {
-        // Status would come from server
-        let status: Status = Status.success
+    const addMaterial = async (material: IMaterial) => {
         setLoading(true)
         // Mock call api, returns from server with an ID
+        await timeout(2000)
+        let status: Status = Status.success
         const savedMaterial = { ...material, id: generateId() }
         setMaterials([
             ...materials,
@@ -172,10 +179,11 @@ export const ApiProvider = ({ children } : IApiProvider) => {
      * @param {IMaterial} material: material to update
      * @returns {RemoteMaterialOperationResponse}
      */
-    const editMaterial = (material: IMaterial) => {
+    const editMaterial = async (material: IMaterial) => {
         let status: Status
         setLoading(true)
         // mock call to api
+        await timeout(2000)
         const idx = materials.find((m: IMaterial) => m.id === material.id) as number | undefined
         if (idx) {
             setMaterials(materials.splice(idx, 1))
@@ -201,10 +209,11 @@ export const ApiProvider = ({ children } : IApiProvider) => {
      * @param {number} id: Id of material to delete
      * @returns {RemoteMaterialDeletionResponse}
      */
-    const deleteMaterial = (id: number) => {
+    const deleteMaterial = async (id: number) => {
         let status: Status
         setLoading(true)
-        // Fake back end
+        // mock call
+        await timeout(2000)
         const idx = materials.findIndex((material: IMaterial) => material.id === id) as number
         if (idx !== -1) {
             const newMaterials = [...materials]
