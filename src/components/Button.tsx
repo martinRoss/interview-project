@@ -13,8 +13,12 @@ const StyledButton = styled.button`
     height ${props => props.theme.grid * 3}px;
 
     &:hover {
-        cursor: pointer;
+        ${props => !props.disabled && 
+        `
         box-shadow: 2px 5px 12px rgba(0, 0, 0, 0.35);
+        cursor: pointer;
+        `
+        }
     }
 `
 
@@ -41,6 +45,7 @@ function Button(props: IButtonProps) {
         <StyledButton
         {...props}
         theme={theme}
+        disabled={disabled}
         style={{
             color: theme.foreground,
             backgroundColor

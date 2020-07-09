@@ -11,7 +11,7 @@ const StyledInput = styled.input`
     border-radius: ${props => props.theme.inputBorderRadius}px;
     background: ${props => props.theme.background};
     margin-top: ${props => props.theme.grid}px;
-    margin-bottom: ${props => props.theme.grid * 2}px;
+    margin-bottom: ${props => props.theme.grid}px;
     color: ${props => props.theme.foreground};
 `
 
