@@ -31,7 +31,6 @@ interface IMaterialsFormProps {
 /**
  * Form to add/edit a material  
  * @param {IMaterialsFormProps} props 
- * @constructor
  */
 function MaterialsForm (props: IMaterialsFormProps) {
     const { theme } = useTheme()

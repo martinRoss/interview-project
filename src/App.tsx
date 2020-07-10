@@ -26,7 +26,6 @@ const AppContainer = styled.div`
 /**
  * After mount point, this is the root node of the application
  * Wraps application in context proivders
- * @constructor
  */
 function App() {
   return (

@@ -83,7 +83,6 @@ interface IApiProvider {
 /**
  * Creates an auto-incrementing id generator
  * @returns {Function} id generator, initialized to 1
- * @constructor
  */
 const idGenerator = () => {
     let current = 1
@@ -117,7 +116,6 @@ export const useApi = () => useContext(ApiContext)
 /**
  * Fake backend API provider
  * @param {IApiProvider} param0: Props passed to the provider
- * @constructor
  */
 export const ApiProvider = ({ children } : IApiProvider) => {
     // Material state (acting as store for the application) and setter

@@ -9,7 +9,6 @@ import { useTheme, ITheme } from '../context/theme'
 /**
  * Input styled with styled components
  * @param {ITheme} theme Current theme
- * @constructor
  */
 const StyledInput = styled.input`
     padding: 9px 15px;
